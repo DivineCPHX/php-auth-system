@@ -28,8 +28,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $errors["login_incorrect"] = "Incorrect login info!";
         }        
 
-        $newSessionId = session_create_id()
+        require_once 'login.config_session.inc.php';
 
+        if ($errors) {
+            $_SESSION["errors_login"] =$errors;
+
+            header("Location: ../index.php");
+            die();
+        }
+
+        $newSessionId = session_create_id()
+        $sessionId = $newSessionId . "_" . $result["id"];
+        session_id($sessionId);
+
+        $_SESSION["user_id"] = $result["id"];
+        $_SESSION["user_username"] = htmlspecialchars($result["username"]);
 
     } catch (PDOException $e) {
         die("Query failed: " . $e->getMessage());
