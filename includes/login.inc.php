@@ -1,4 +1,4 @@
-<? php 
+<?php 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST["username"];
     $pwd = $_POST["pwd"];
@@ -14,9 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $errors["empty_input"] = "Fill in all the fields!";
         } 
 
-        if (is_email_invalid($email)) {
-            $errors["empty_input"] = "Email is invalid!";
-        }
+        // if (is_email_invalid($email)) {
+        //     $errors["empty_input"] = "Email is invalid!";
+        // }
 
         $result = get_user($pdo, $username);
 
@@ -29,21 +29,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }        
 
         require_once 'login.config_session.inc.php';
-
+        
         if ($errors) {
-            $_SESSION["errors_login"] =$errors;
+            $_SESSION["errors_login"] = $errors;
 
             header("Location: ../index.php");
             die();
         }
+        
 
-        $newSessionId = session_create_id()
+        $newSessionId = session_create_id();
         $sessionId = $newSessionId . "_" . $result["id"];
         session_id($sessionId);
 
         $_SESSION["user_id"] = $result["id"];
         $_SESSION["user_username"] = htmlspecialchars($result["username"]);
+        $_SESSION["last_regeneration"] = time();
 
+        header("Location: ../index.php?login=success");
+        $pdo = null;
+        $statement = null;
+
+        die();
     } catch (PDOException $e) {
         die("Query failed: " . $e->getMessage());
     }

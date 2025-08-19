@@ -9,16 +9,16 @@ function is_input_empty(string $username, string $pwd) {
     }
 } 
 
-function is_email_invalid(string $email) {
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return true;
-    } else {
-        return false;
-    }
-}
+// function is_email_invalid(string $email) {
+//     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+//         return true;
+//     } else {
+//         return false;
+//     }
+// }
 
-function is_username_wrong(bool | array $result) {
-    if (!$reult) {
+function is_username_wrong(bool|array $result) {
+    if (!$result) {
         return true;
     } else {
         return false;

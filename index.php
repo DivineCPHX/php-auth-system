@@ -16,13 +16,13 @@ require_once 'includes/login_view.inc.php';
     <h3>Login</h3>
 
     <form class="login.form" action="includes/login.inc.php" method="post">
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="pwd" placeholder="Password">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="pwd" placeholder="Password" required>
         <input type="submit" value="Submit">
     </form>
 
     <?php
-        // check_login_errors();
+        check_login_errors();
     ?>
 </body>
 </html>
