@@ -25,8 +25,14 @@ function is_username_wrong(bool|array $result) {
     }
 }
 
-function is_pwd_wrong(string $pwd, string $hashedPwd) {
-    if (!password_verify($pwd, $hashedPwd)) {
+// function is_pwd_wrong(string $pwd, string $hashedPwd) {
+function is_pwd_wrong(string $pwd) {
+
+    // if (!password_verify($pwd, $hashedPwd)) {
+    // if (!password_verify($pwd)) {
+    if (!password_get_info($pwd)) {
+
+
         return true;
     } else {
         return false;

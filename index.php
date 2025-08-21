@@ -13,11 +13,22 @@ require_once 'includes/login_view.inc.php';
     <title>Document</title>
 </head>
 <body>
+
+    <?php
+    output_username();
+    ?>
+
     <h3>Login</h3>
 
     <form class="login.form" action="includes/login.inc.php" method="post">
         <input type="text" name="username" placeholder="Username" required>
         <input type="password" name="pwd" placeholder="Password" required>
+        <input type="submit" value="Submit">
+    </form>
+    <br>
+    <h3>Logout</h3>
+
+    <form class="login.form" action="includes/logout.inc.php" method="post">
         <input type="submit" value="Submit">
     </form>
 
