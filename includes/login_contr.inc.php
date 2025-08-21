@@ -31,8 +31,6 @@ function is_pwd_wrong(string $pwd) {
     // if (!password_verify($pwd, $hashedPwd)) {
     // if (!password_verify($pwd)) {
     if (!password_get_info($pwd)) {
-
-
         return true;
     } else {
         return false;

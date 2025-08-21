@@ -7,6 +7,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
        require_once 'dbh.inc.php';
        require_once 'login_model.inc.php';
        require_once 'login_contr.inc.php';
+
+        // Classes_Requires
+        require_once '../Classes/Dbh.php';
+        require_once '../Classes/Login.php';
+
+        $login = new Login($username, $pwd);
+        $login->loginUser();
+
         
         // ERROR HANDLERS
         $errors = [];
