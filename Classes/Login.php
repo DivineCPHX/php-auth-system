@@ -1,6 +1,8 @@
 <?php 
+    require_once 'Dbh.php';
 
-class Login extends Dbh{
+
+class Login extends Dbh {
     private $username;
     private $pwd;
 
@@ -10,13 +12,18 @@ class Login extends Dbh{
     }
 
     private function insertUser() {
-        $query = "INSERT INTO users ('username', 'pwd') VALUES (:username. :pwd);";
+
+        $query = "INSERT INTO users (username, pwd) VALUES (:username, :pwd);";
         
         $stmt = parent::connect()->prepare($query);
         $stmt->bindParam(":username", $this->username);
         $stmt->bindParam(":pwd", $this->pwd);
 
-        $stmt->execute();
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
 
     private function isSubmitEmpty() {
@@ -36,7 +43,7 @@ class Login extends Dbh{
             die();
         }
 
-        // If no errors
+        // If no errors 
         $this->insertUser();
         
     }
